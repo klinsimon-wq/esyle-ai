@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ESYLE — Adaptive AI Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: #0d0f14;
+      color: #e6e6eb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 80px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 6px 12px;
+      border: 1px solid #3a3f55;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ESYLE</h1>
+    <p>
+      Projet de recherche expérimental sur les personnalités adaptatives de l’IA
+      et l’interaction homme–IA à long terme.
+    </p>
+
+    <p>
+      ESYLE explore la continuité émotionnelle, la mémoire persistante
+      et l’évolution autonome des systèmes cognitifs artificiels.
+    </p>
+
+    <span class="tag">Research · Adaptive AI · Long-term Interaction</span>
+  </div>
+</body>
+</html>
