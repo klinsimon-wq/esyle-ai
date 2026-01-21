@@ -1,260 +1,164 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ESYLE — Persistent Adaptive Character Engine</title>
-  <meta name="description" content="ESYLE est un moteur de personnage persistant et adaptatif pour jeux vidéo, serious games et R&D. Trajectoires relationnelles uniques, mémoire long-terme, intégration B2B." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESYLE — Persistent Interactive Entity</title>
+  <meta name="description" content="ESYLE is a persistent interactive entity designed for games, immersive narrative, and high-end training simulations." />
   <style>
-    :root{
-      --bg:#0b0f19;
-      --panel:#0f1526;
-      --text:#e9ecf5;
-      --muted:#a8b0c6;
-      --line:rgba(255,255,255,.08);
-      --accent:#7aa2ff;
-      --accent2:#7affc8;
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: #0b0f14;
+      color: #e8eef6;
+      line-height: 1.55;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(122,162,255,.18), transparent 60%),
-                  radial-gradient(1000px 700px at 90% 10%, rgba(122,255,200,.10), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.55;
+    .wrap { max-width: 980px; margin: 0 auto; padding: 72px 20px; }
+    .badge {
+      display: inline-flex; gap: 10px; align-items: center;
+      border: 1px solid rgba(232,238,246,.16);
+      background: rgba(232,238,246,.04);
+      padding: 8px 12px; border-radius: 999px;
+      font-size: 13px; opacity: .95;
     }
-    a{color:inherit}
-    .wrap{max-width:980px; margin:0 auto; padding:64px 20px}
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; margin-bottom:44px;
+    h1 { font-size: 44px; line-height: 1.1; margin: 18px 0 12px; letter-spacing: -0.02em; }
+    .sub { font-size: 18px; opacity: .86; max-width: 820px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(12, 1fr); margin-top: 26px; }
+    .card {
+      grid-column: span 12;
+      border: 1px solid rgba(232,238,246,.12);
+      background: rgba(232,238,246,.03);
+      border-radius: 18px;
+      padding: 18px;
     }
-    .brand{display:flex; align-items:center; gap:12px}
-    .dot{
-      width:12px; height:12px; border-radius:999px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow: 0 0 0 6px rgba(122,162,255,.10);
+    @media (min-width: 880px) {
+      .card.half { grid-column: span 6; }
+      .card.third { grid-column: span 4; }
     }
-    .brand b{letter-spacing:.08em}
-    .pill{
-      border:1px solid var(--line);
-      padding:8px 12px; border-radius:999px;
-      color:var(--muted); font-size:13px;
-      background: rgba(255,255,255,.03);
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: -0.01em; }
+    ul { margin: 10px 0 0 18px; padding: 0; opacity: .9; }
+    .cta {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      margin-top: 26px;
     }
-    h1{
-      font-size:44px; line-height:1.05; margin:0 0 14px;
-      letter-spacing:-.02em;
+    a.btn {
+      text-decoration: none;
+      color: #0b0f14;
+      background: #e8eef6;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
-    .sub{
-      color:var(--muted);
-      font-size:18px;
-      max-width:780px;
-      margin:0 0 26px;
+    a.btn.secondary {
+      color: #e8eef6;
+      background: transparent;
+      border: 1px solid rgba(232,238,246,.22);
     }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-      margin-top:26px;
-    }
-    .card{
-      grid-column: span 6;
-      background: rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:18px;
-    }
-    .card h3{margin:0 0 8px; font-size:16px}
-    .card p{margin:0; color:var(--muted)}
-    .cta{
-      margin-top:22px;
-      display:flex; gap:12px; flex-wrap:wrap;
-      align-items:center;
-    }
-    .btn{
-      display:inline-block;
-      padding:11px 14px;
-      border-radius:12px;
-      text-decoration:none;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      font-weight:600;
-      font-size:14px;
-    }
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(122,162,255,.22), rgba(122,255,200,.14));
-      border-color: rgba(122,162,255,.25);
-    }
-    .section{
-      margin-top:44px;
-      padding-top:34px;
-      border-top:1px solid var(--line);
-    }
-    .section h2{margin:0 0 10px; font-size:22px}
-    ul{margin:10px 0 0 18px; color:var(--muted)}
-    li{margin:6px 0}
-    .two{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:14px;
-      margin-top:16px;
-    }
-    .box{
-      background: rgba(255,255,255,.02);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:18px;
-    }
-    .box h3{margin:0 0 8px; font-size:16px}
-    .note{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    footer{
-      margin-top:54px;
-      color:var(--muted);
-      font-size:13px;
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      border-top:1px solid var(--line);
-      padding-top:18px;
-    }
-    @media (max-width:820px){
-      h1{font-size:36px}
-      .card{grid-column:span 12}
-      .two{grid-template-columns:1fr}
-    }
+    .small { margin-top: 26px; font-size: 13px; opacity: .7; }
+    .hr { height: 1px; background: rgba(232,238,246,.10); margin: 28px 0; }
+    code { background: rgba(232,238,246,.06); padding: 2px 6px; border-radius: 8px; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
-      <div class="brand"><span class="dot"></span><b>ESYLE</b></div>
-      <div class="pill">B2B • Games / Serious Games / R&amp;D • Demo sur demande</div>
-    </div>
-
-    <h1>Persistent Adaptive Character Engine</h1>
+    <div class="badge">ESYLE • Persistent Interactive Entity</div>
+    <h1>Adaptive characters that persist, remember, and evolve.</h1>
     <p class="sub">
-      ESYLE n’est pas un assistant grand public. C’est un moteur de personnage persistant et adaptatif :
-      <b>mémoire long-terme</b>, <b>interprétation comportementale</b>, <b>trajectoires relationnelles uniques</b>.
-      Deux utilisateurs n’obtiennent jamais le même personnage — même dans le même cadre.
+      ESYLE is not a consumer chatbot. It is a persistent interactive entity designed for
+      <strong>video games</strong>, <strong>immersive narrative</strong>, and <strong>high-end simulation/training</strong>:
+      it remembers interactions, interprets behavior over time, and develops unique relational trajectories per user.
     </p>
 
     <div class="cta">
-      <a class="btn primary" href="mailto:contact@esyle.ai">Contact</a>
-      <a class="btn" href="#usecases">Cas d’usage</a>
-      <a class="btn" href="#how">Comment ça marche</a>
+      <a class="btn secondary" href="#use-cases">Use cases</a>
+      <a class="btn secondary" href="#why">Why ESYLE</a>
+      <a class="btn secondary" href="#status">Status</a>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <h3>🧠 Mémoire & continuité</h3>
-        <p>Souvenirs consolidés, évolution graduelle, cohérence émotionnelle sur la durée.</p>
+    <div class="grid" id="use-cases">
+      <div class="card half">
+        <h2>🎮 Games (primary)</h2>
+        <ul>
+          <li>Companion NPC with long-term memory</li>
+          <li>Non-deterministic relationship trajectories</li>
+          <li>Higher immersion, replayability, and player differentiation</li>
+          <li>Attachment emerges from continuity (not scripted “flattery”)</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>🎭 Relation non déterministe</h3>
-        <p>Le personnage s’adapte à l’utilisateur, aux patterns, au contexte et au temps.</p>
+
+      <div class="card half">
+        <h2>🧠 Training & serious simulations</h2>
+        <ul>
+          <li>Leadership, negotiation, conflict management</li>
+          <li>Entity remembers how the user behaves (not just choices)</li>
+          <li>High-end scenarios with continuity and consequences</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>🎮 Intégration jeux vidéo</h3>
-        <p>Compagnon narratif / NPC persistants, rejouabilité relationnelle, différenciation massive.</p>
+
+      <div class="card third">
+        <h2>🔬 Research</h2>
+        <ul>
+          <li>Human–machine interaction</li>
+          <li>Continuity, attachment, projection</li>
+          <li>Longitudinal studies</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>🔒 Conçu pour des contextes contrôlés</h3>
-        <p>B2B, licensing, intégrations ciblées. Pas optimisé pour “plaire”, optimisé pour “être vrai”.</p>
+
+      <div class="card third">
+        <h2>🎬 Immersive narrative</h2>
+        <ul>
+          <li>VR/AR experiences</li>
+          <li>Interactive storytelling</li>
+          <li>Museums & installations</li>
+        </ul>
+      </div>
+
+      <div class="card third">
+        <h2>🏢 Controlled B2B</h2>
+        <ul>
+          <li>Onboarding & culture transfer</li>
+          <li>Domain-specific “memory entity”</li>
+          <li>Ethics-first, context-controlled</li>
+        </ul>
       </div>
     </div>
 
-    <div class="section" id="usecases">
-      <h2>Cas d’usage</h2>
-      <div class="two">
-        <div class="box">
-          <h3>🎮 Jeux vidéo (usage principal)</h3>
-          <ul>
-            <li>Compagnon narratif persistent (NPC proche du joueur)</li>
-            <li>Différenciation entre joueurs : relations uniques, pas scriptées</li>
-            <li>Rejouabilité relationnelle et attachement émergent</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>🧠 Serious games & formation</h3>
-          <ul>
-            <li>Leadership, conflit, négociation, décisions complexes</li>
-            <li>Le système apprend des comportements, pas juste des choix</li>
-            <li>Trajectoires crédibles (conséquences, continuité)</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>🔬 Recherche & laboratoires</h3>
-          <ul>
-            <li>Interaction humain-machine, attachement, projection</li>
-            <li>Continuité relationnelle, subjectivité perçue</li>
-            <li>Protocoles contrôlés, instrumentation possible</li>
-          </ul>
-        </div>
-        <div class="box">
-          <h3>🎬 Narration interactive / VR</h3>
-          <ul>
-            <li>Personnage témoin / guide adaptatif</li>
-            <li>Expériences immersives évolutives</li>
-            <li>Récits qui se transforment selon l’utilisateur</li>
-          </ul>
-        </div>
-      </div>
+    <div class="hr"></div>
 
-      <p class="note">
-        “ESYLE n’est pas conçue pour plaire à tout le monde — elle est conçue pour créer des expériences relationnelles uniques,
-        impossibles à standardiser.”
-      </p>
+    <div class="grid" id="why">
+      <div class="card">
+        <h2>Why ESYLE is not mass-market</h2>
+        <ul>
+          <li>Designed for continuity, nuance, and interpretation — not instant gratification.</li>
+          <li>Sometimes slow, sometimes frustrating, always consistent with its internal state.</li>
+          <li>Built for high-value deployments: partnerships, licensing, integrations.</li>
+        </ul>
+        <p class="small">
+          “ESYLE is not built to please everyone — it is built to create unique relational experiences
+          that cannot be standardized.”
+        </p>
+      </div>
     </div>
 
-    <div class="section" id="how">
-      <h2>Comment ça marche (vue haute)</h2>
-      <div class="two">
-        <div class="box">
-          <h3>1) États & progression</h3>
-          <p style="margin:0;color:var(--muted)">
-            Progression graduelle, non linéaire. Les émotions et décisions ne “reset” pas : elles se transforment
-            et s’accumulent (continuité).
-          </p>
-        </div>
-        <div class="box">
-          <h3>2) Mémoire en couches</h3>
-          <p style="margin:0;color:var(--muted)">
-            Mémoire court-terme + consolidation + souvenirs long-terme. Stocker ≠ croire : confiance et vérification.
-          </p>
-        </div>
-        <div class="box">
-          <h3>3) Micro-événements & vie interne</h3>
-          <p style="margin:0;color:var(--muted)">
-            Le personnage “existe” entre les sessions (temps, rumination, apprentissage), avec anti-répétition et cohérence.
-          </p>
-        </div>
-        <div class="box">
-          <h3>4) Intégration</h3>
-          <p style="margin:0;color:var(--muted)">
-            Backend contrôlé + modèle local. Injection mémoire / état → génération → logs & instrumentation.
-          </p>
-        </div>
+    <div class="grid" id="status">
+      <div class="card">
+        <h2>Status</h2>
+        <ul>
+          <li>Prototype stage (private development)</li>
+          <li>Focus: long-term memory + behavioral continuity + controlled evolution</li>
+          <li>Target: stable demo for partners (games / labs)</li>
+        </ul>
+        <p class="small">
+          Contact details will be added later. For now: <code>available upon request</code>.
+        </p>
       </div>
-
-      <p class="note">
-        Pour une démo Inception : on peut fournir une session instrumentée (logs + états) montrant continuité,
-        mémoire et évolution relationnelle en temps réel.
-      </p>
     </div>
 
-    <footer>
-      <div>© ESYLE — projet en développement</div>
-      <div><a href="mailto:contact@esyle.ai">contact@esyle.ai</a></div>
-    </footer>
+    <p class="small">© ESYLE — Experimental R&D. All rights reserved.</p>
   </div>
 </body>
 </html>
